@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UserDetailsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="initials" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="initials" Type="nchar" MaxLength="5" Nullable="false" />
+          <Property Name="age" Type="int" Nullable="false" />
+          <Property Name="gender" Type="nchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserPreviousResults">
+          <Key>
+            <PropertyRef Name="initials" />
+          </Key>
+          <Property Name="initials" Type="nchar" MaxLength="5" Nullable="false" />
+          <Property Name="Date of Test" Type="datetime" Nullable="false" />
+          <Property Name="Chosen Step Height" Type="int" Nullable="false" />
+          <Property Name="Max HR" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="80% of Max HR" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="50% of Max HR" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HR stage 1 reading" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HR stage 2 reading" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HR stage 3 reading" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HR stage 4 reading" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HR stage 5 reading" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Aerobic Capacity" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Fitness Rating" Type="nchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_UserPreviousResults_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+          <End Role="UserPreviousResults" Type="Self.UserPreviousResults" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="initials" />
+            </Principal>
+            <Dependent Role="UserPreviousResults">
+              <PropertyRef Name="initials" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UserDetailsModelStoreContainer">
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPreviousResults" EntityType="Self.UserPreviousResults" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_UserPreviousResults_UserDetails" Association="Self.FK_UserPreviousResults_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="UserPreviousResults" EntitySet="UserPreviousResults" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UserDetailsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="initials" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="initials" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="age" Type="Int32" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserPreviousResult" Relationship="Self.FK_UserPreviousResults_UserDetails" FromRole="UserDetails" ToRole="UserPreviousResults" />
+        </EntityType>
+        <EntityType Name="UserPreviousResult">
+          <Key>
+            <PropertyRef Name="initials" />
+          </Key>
+          <Property Name="initials" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Date_of_Test" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Chosen_Step_Height" Type="Int32" Nullable="false" />
+          <Property Name="Max_HR" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="C80__of_Max_HR" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="C50__of_Max_HR" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HR_stage_1_reading" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HR_stage_2_reading" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HR_stage_3_reading" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HR_stage_4_reading" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HR_stage_5_reading" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Aerobic_Capacity" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Fitness_Rating" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK_UserPreviousResults_UserDetails" FromRole="UserPreviousResults" ToRole="UserDetails" />
+        </EntityType>
+        <Association Name="FK_UserPreviousResults_UserDetails">
+          <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="1" />
+          <End Role="UserPreviousResults" Type="Self.UserPreviousResult" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetails">
+              <PropertyRef Name="initials" />
+            </Principal>
+            <Dependent Role="UserPreviousResults">
+              <PropertyRef Name="initials" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UserDetailsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <EntitySet Name="UserPreviousResults" EntityType="Self.UserPreviousResult" />
+          <AssociationSet Name="FK_UserPreviousResults_UserDetails" Association="Self.FK_UserPreviousResults_UserDetails">
+            <End Role="UserDetails" EntitySet="UserDetails" />
+            <End Role="UserPreviousResults" EntitySet="UserPreviousResults" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UserDetailsModelStoreContainer" CdmEntityContainer="UserDetailsEntities">
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="UserDetailsModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="initials" ColumnName="initials" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPreviousResults">
+            <EntityTypeMapping TypeName="UserDetailsModel.UserPreviousResult">
+              <MappingFragment StoreEntitySet="UserPreviousResults">
+                <ScalarProperty Name="initials" ColumnName="initials" />
+                <ScalarProperty Name="Date_of_Test" ColumnName="Date of Test" />
+                <ScalarProperty Name="Chosen_Step_Height" ColumnName="Chosen Step Height" />
+                <ScalarProperty Name="Max_HR" ColumnName="Max HR" />
+                <ScalarProperty Name="C80__of_Max_HR" ColumnName="80% of Max HR" />
+                <ScalarProperty Name="C50__of_Max_HR" ColumnName="50% of Max HR" />
+                <ScalarProperty Name="HR_stage_1_reading" ColumnName="HR stage 1 reading" />
+                <ScalarProperty Name="HR_stage_2_reading" ColumnName="HR stage 2 reading" />
+                <ScalarProperty Name="HR_stage_3_reading" ColumnName="HR stage 3 reading" />
+                <ScalarProperty Name="HR_stage_4_reading" ColumnName="HR stage 4 reading" />
+                <ScalarProperty Name="HR_stage_5_reading" ColumnName="HR stage 5 reading" />
+                <ScalarProperty Name="Aerobic_Capacity" ColumnName="Aerobic Capacity" />
+                <ScalarProperty Name="Fitness_Rating" ColumnName="Fitness Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UserDetailsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="initials" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="initials" Type="nchar" MaxLength="5" Nullable="false" />
+    <Property Name="age" Type="int" Nullable="false" />
+    <Property Name="gender" Type="nchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserPreviousResults">
+    <Key>
+      <PropertyRef Name="initials" />
+    </Key>
+    <Property Name="initials" Type="nchar" MaxLength="5" Nullable="false" />
+    <Property Name="Date of Test" Type="datetime" Nullable="false" />
+    <Property Name="Chosen Step Height" Type="int" Nullable="false" />
+    <Property Name="Max HR" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="80% of Max HR" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="50% of Max HR" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="HR stage 1 reading" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="HR stage 2 reading" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="HR stage 3 reading" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="HR stage 4 reading" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="HR stage 5 reading" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Aerobic Capacity" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Fitness Rating" Type="nchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_UserPreviousResults_UserDetails">
+    <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+    <End Role="UserPreviousResults" Type="Self.UserPreviousResults" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="initials" />
+      </Principal>
+      <Dependent Role="UserPreviousResults">
+        <PropertyRef Name="initials" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UserDetailsModelStoreContainer">
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserPreviousResults" EntityType="Self.UserPreviousResults" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_UserPreviousResults_UserDetails" Association="Self.FK_UserPreviousResults_UserDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="UserPreviousResults" EntitySet="UserPreviousResults" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

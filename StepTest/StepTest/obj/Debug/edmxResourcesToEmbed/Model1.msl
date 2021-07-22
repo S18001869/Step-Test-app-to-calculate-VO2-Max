@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UserDetailsModelStoreContainer" CdmEntityContainer="UserDetailsEntities">
+    <EntitySetMapping Name="UserDetails">
+      <EntityTypeMapping TypeName="UserDetailsModel.UserDetail">
+        <MappingFragment StoreEntitySet="UserDetails">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="initials" ColumnName="initials" />
+          <ScalarProperty Name="age" ColumnName="age" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserPreviousResults">
+      <EntityTypeMapping TypeName="UserDetailsModel.UserPreviousResult">
+        <MappingFragment StoreEntitySet="UserPreviousResults">
+          <ScalarProperty Name="initials" ColumnName="initials" />
+          <ScalarProperty Name="Date_of_Test" ColumnName="Date of Test" />
+          <ScalarProperty Name="Chosen_Step_Height" ColumnName="Chosen Step Height" />
+          <ScalarProperty Name="Max_HR" ColumnName="Max HR" />
+          <ScalarProperty Name="C80__of_Max_HR" ColumnName="80% of Max HR" />
+          <ScalarProperty Name="C50__of_Max_HR" ColumnName="50% of Max HR" />
+          <ScalarProperty Name="HR_stage_1_reading" ColumnName="HR stage 1 reading" />
+          <ScalarProperty Name="HR_stage_2_reading" ColumnName="HR stage 2 reading" />
+          <ScalarProperty Name="HR_stage_3_reading" ColumnName="HR stage 3 reading" />
+          <ScalarProperty Name="HR_stage_4_reading" ColumnName="HR stage 4 reading" />
+          <ScalarProperty Name="HR_stage_5_reading" ColumnName="HR stage 5 reading" />
+          <ScalarProperty Name="Aerobic_Capacity" ColumnName="Aerobic Capacity" />
+          <ScalarProperty Name="Fitness_Rating" ColumnName="Fitness Rating" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
